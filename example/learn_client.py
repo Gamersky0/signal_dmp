@@ -10,7 +10,7 @@ if __name__ == "__main__":
     req = LearnDMPRequest()
 
     # Generating a hypothetical trajectory
-    x = np.linspace(0, 5)
+    x = np.linspace(0, 5) # 0到5之间生成50个等间隔数据点
     y = np.linspace(0, 5)
     z = np.zeros(10)
     z = np.hstack((z, np.ones(30)))
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     req.n_bfs = 500
     req.n_dmps = 6
 
-    for i in range(x.shape[0]):
+    for i in range(x.shape[0]): # x y z + 四元数
         pose = Pose()
         pose.position.x = x[i]
         pose.position.y = y[i]

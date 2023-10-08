@@ -52,6 +52,7 @@ class LearnDmp:
         trajectory = np.zeros((6, len(req.poses)))
         rospy.loginfo("Learning motion primitive " + req.dmp_name)
         for i in range(len(req.poses)):
+            # 将四元数变为欧拉角表示
             rpy = tf.transformations.euler_from_quaternion([req.poses[i].orientation.x,
                                                             req.poses[i].orientation.y,
                                                             req.poses[i].orientation.z,
@@ -59,6 +60,7 @@ class LearnDmp:
             trajectory[:, i] = [req.poses[i].position.x, req.poses[i].position.y,
                                 req.poses[i].position.z, rpy[0], rpy[1], rpy[2]]
             
+        # 传入的轨迹是 x + y + z + roll + pitch + yaw 表示方法
         self.learn_dmp(trajectory, req.output_weight_file_name, req.n_dmps, req.n_bfs)
         rospy.loginfo("Successfully learned the motion primitive")
 
