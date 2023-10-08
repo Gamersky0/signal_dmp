@@ -42,6 +42,6 @@ if __name__ == "__main__":
     # Call the service
     try:
         service_client = rospy.ServiceProxy('/learn_dynamic_motion_primitive_service', LearnDMP)
-        rospy.loginfo(service_client(req))
+        rospy.loginfo(service_client(req))  # success or fail
     except :
         rospy.loginfo("Service call failed")

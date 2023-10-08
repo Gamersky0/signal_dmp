@@ -10,7 +10,7 @@ if __name__ == "__main__":
     req = GenerateMotionRequest()
 
     # Compose request message
-    req.dmp_name = "dmp/weights/example.yaml"
+    req.dmp_name = "/home/huqi/weights/example.yaml"
     req.tau = 1.0
     req.dt = 0.01
     req.goal_pose = PoseStamped()
@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     try:
         service_client = rospy.ServiceProxy('/generate_motion_service', GenerateMotion)
-        rospy.loginfo(service_client(req))
+        rospy.loginfo(service_client(req)) # success or fail
     except :
         rospy.loginfo("Service call failed")
     

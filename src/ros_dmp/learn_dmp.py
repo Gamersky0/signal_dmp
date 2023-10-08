@@ -39,6 +39,14 @@ class LearnDmp:
         '''Handler for client request
 
         req: service request msg
+        请求形式：
+            Header header
+            string output_weight_file_name
+            string dmp_name
+            geometry_msgs/Pose[] poses
+            int64 n_bfs  基函数数量
+            int64 n_dmps 维度数量(default 6 for 迪卡尔轨迹)
+
         '''
         rospy.loginfo("Recieved request to learn a motion primitive")
         trajectory = np.zeros((6, len(req.poses)))
@@ -50,8 +58,10 @@ class LearnDmp:
                                                             req.poses[i].orientation.w])
             trajectory[:, i] = [req.poses[i].position.x, req.poses[i].position.y,
                                 req.poses[i].position.z, rpy[0], rpy[1], rpy[2]]
+            
         self.learn_dmp(trajectory, req.output_weight_file_name, req.n_dmps, req.n_bfs)
         rospy.loginfo("Successfully learned the motion primitive")
+
         # Return response
         response = LearnDMPResponse()
         response.result = self.result
@@ -85,6 +95,8 @@ class LearnDmp:
                 'pitch': np.asarray(weights[4, :]).tolist(),
                 'yaw': np.asarray(weights[5, :]).tolist()}
         file = join(self.weights_file_path, file_name)
+        # DEBUG:
+        print("DEBUG, Saving filepath: ", file)
         try:
             with open(file, "a+") as f:
                 yaml.dump(data, f)

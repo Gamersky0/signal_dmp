@@ -21,7 +21,7 @@ Modifications are made such that the software can be easily integrated in ROS.
 '''
 import numpy as np
 
-from cs import CanonicalSystem
+from .cs import CanonicalSystem
 
 
 class DMPs(object):

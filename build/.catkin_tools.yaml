@@ -1,0 +1,6 @@
+devel_space: /home/huqi/os_test/ros_dmp/devel
+install: false
+install_space: /home/huqi/os_test/ros_dmp/install
+profile: default
+source_space: /home/huqi/os_test/ros_dmp/src
+workspace: /home/huqi/os_test/ros_dmp

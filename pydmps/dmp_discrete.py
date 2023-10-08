@@ -20,7 +20,7 @@ This softawre is modified version of original software provided by Travis DeWolf
 Modifications are made such that the software can be easily integrated in ROS.  
 '''
 
-from dmp import DMPs
+from .dmp import DMPs
 import numpy as np
 
 
@@ -41,7 +41,7 @@ class DMPs_discrete(DMPs):
         self.h = np.ones(self.n_bfs) * self.n_bfs**1.5 / self.c / self.cs.ax
         self.check_offset()
 
-    def gen_centers(self):
+    def gen_centers(self):  
         """Set the centre of the Gaussian basis
         functions be spaced evenly throughout run time"""
 

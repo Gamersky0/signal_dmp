@@ -17,14 +17,22 @@ class GenerateMotionClass:
         rospy.init_node("generate_motion_service_node")
         rospy.Service("generate_motion_service", GenerateMotion, self.generate_motion)
         rospy.loginfo("Started Motion Generation Service")
+
         # Publishers
         self.trajectory_pub = rospy.Publisher('~cartesian_trajectory', CartesianTrajectory, queue_size=1)
         self.path_pub = rospy.Publisher('~cartesian_path', Path, queue_size=1)
 
-    def generate_motion(self, req):
+    def generate_motion(self, req): # 订阅service
         ''' Generates trajectory upon request
 
         req: request meassage
+        请求格式：
+            string dmp_name
+            geometry_msgs/PoseStamped initial_pose
+            geometry_msgs/PoseStamped goal_pose
+            float64 tau
+            float64 dt
+        
         '''
         rospy.loginfo("Received motion generation request")
         # Initial pose
